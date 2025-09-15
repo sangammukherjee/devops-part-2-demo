@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                git url: 'https://github.com/your-username/mern-app.git', branch: 'main'
+                git url: 'https://github.com/sangammukherjee/devops-part-2-demo.git', branch: 'master'
             }
         }
 
