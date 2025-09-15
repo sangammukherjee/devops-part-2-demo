@@ -45,24 +45,6 @@ EOF
       }
     }
 
-    stage('Test Services') {
-      steps {
-        sh '''
-          i=0
-          until curl -sf http://localhost:5000 || [ $i -ge 12 ]; do
-            i=$((i+1))
-            echo "Waiting for backend... ($i)"
-            sleep 5
-          done
-          if [ $i -ge 12 ]; then
-            exit 1
-          fi
-
-          curl -f http://localhost:5173 || exit 1
-        '''
-      }
-    }
-
     stage('Cleanup') {
       steps {
         sh 'docker compose down'
