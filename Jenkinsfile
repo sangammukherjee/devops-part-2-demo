@@ -41,13 +41,19 @@ EOF
 
     stage('Run with Docker Compose') {
       steps {
-        sh 'docker compose up -d'
-      }
-    }
+        sh '''
+          echo "Starting MERN stack with Docker Compose..."
+          docker compose up -d
 
-    stage('Cleanup') {
-      steps {
-        sh 'docker compose down'
+          echo "Showing running containers..."
+          docker ps
+
+          echo "===== Backend Logs ====="
+          docker logs backend || true
+
+          echo "===== Frontend Logs ====="
+          docker logs frontend || true
+        '''
       }
     }
   }
